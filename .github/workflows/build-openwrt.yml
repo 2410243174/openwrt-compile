@@ -82,7 +82,6 @@ jobs:
         # ========================feed定制部分结束========================
         # 
         sed -i 's/^[ \t]*//g' ./feeds.conf.default
-        make defconfig
  
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
