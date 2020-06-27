@@ -65,24 +65,24 @@ jobs:
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
- - name: Generate feed file
-        run: |
-          rm -f ./feeds.conf.default
-          touch ./feeds.conf.default
-          #
-          # ========================feed定制部分========================
-          src-git packages https://github.com/coolsnowwolf/packages
-          src-git luci https://github.com/coolsnowwolf/luci
-          src-git routing https://git.openwrt.org/feed/routing.git;openwrt-19.07
-          src-git telephony https://git.openwrt.org/feed/telephony.git;openwrt-19.07
-          src-git helloworld https://github.com/fw876/helloworld
-          src-git kenzo https://github.com/V2RaySSR/openwrt-packages
-          src-git small https://github.com/V2RaySSR/small
-          src-git openwrt https://github.com/2410243174/openwrt-luci
-          # ========================feed定制部分结束========================
-          # 
-          sed -i 's/^[ \t]*//g' ./feeds.conf.default
-          make defconfig
+    - name: Generate feed file
+      run: |
+        rm -f ./feeds.conf.default
+        touch ./feeds.conf.default
+        #
+        # ========================feed定制部分========================
+        src-git packages https://github.com/coolsnowwolf/packages
+        src-git luci https://github.com/coolsnowwolf/luci
+        src-git routing https://git.openwrt.org/feed/routing.git;openwrt-19.07
+        src-git telephony https://git.openwrt.org/feed/telephony.git;openwrt-19.07
+        src-git helloworld https://github.com/fw876/helloworld
+        src-git kenzo https://github.com/V2RaySSR/openwrt-packages
+        src-git small https://github.com/V2RaySSR/small
+        src-git openwrt https://github.com/2410243174/openwrt-luci
+        # ========================feed定制部分结束========================
+        # 
+        sed -i 's/^[ \t]*//g' ./feeds.conf.default
+        make defconfig
  
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
